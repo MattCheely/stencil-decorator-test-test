@@ -1,5 +1,6 @@
 import { Component, Prop, h } from '@stencil/core';
 import { format } from '../../utils/utils';
+import { OnResize } from '../../utils/decorator';
 
 @Component({
   tag: 'my-component',
@@ -22,8 +23,15 @@ export class MyComponent {
    */
   @Prop() last: string;
 
+  @Prop() clickOutCount: number = 0;
+
   private getText(): string {
     return format(this.first, this.middle, this.last);
+  }
+
+  @OnResize()
+  private logResize(): void {
+    console.log('RESIZED!');
   }
 
   render() {
